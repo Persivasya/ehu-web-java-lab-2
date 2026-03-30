@@ -17,7 +17,6 @@ public class StatsProcessor {
 
     public static StatsProcessor Instance = new StatsProcessor();
 
-
     private final Map<Integer, StatCalculator> stats = Map.of(
             1, new StatCalculator() {
                 @Override
@@ -28,7 +27,8 @@ public class StatsProcessor {
                 @Override
                 public void run() {
                     CoffeeStats mostPopularCoffee = CoffeService.Instance.getMostPopularCoffee();
-                    System.out.println("Most popular coffee: " + mostPopularCoffee.getCoffee() + " with " + mostPopularCoffee + " orders");
+                    System.out.println("Most popular coffee: " + mostPopularCoffee.getCoffee() + " with "
+                            + mostPopularCoffee + " orders");
                 }
             },
             2, new StatCalculator() {
@@ -50,7 +50,8 @@ public class StatsProcessor {
 
                 @Override
                 public void run() {
-                    System.out.println("Most revenue generating coffee: " + CoffeService.Instance.getMostRevenueGeneratingCoffee());
+                    System.out.println("Most revenue generating coffee: "
+                            + CoffeService.Instance.getMostRevenueGeneratingCoffee());
                 }
             },
             4, new StatCalculator() {
@@ -62,7 +63,8 @@ public class StatsProcessor {
                 @Override
                 public void run() {
                     CoffeeStats mostPopularCoffee = CoffeService.Instance.getMostPopularCoffee();
-                    List<User> usersByMostOrderedCoffee = UserService.Instance.getUsersByMostOrderedCoffee(mostPopularCoffee.getCoffee());
+                    List<User> usersByMostOrderedCoffee = UserService.Instance
+                            .getUsersByMostOrderedCoffee(mostPopularCoffee.getCoffee());
                     System.out.println("Users who ordered most popular coffee: " + usersByMostOrderedCoffee);
                 }
             },
@@ -74,9 +76,9 @@ public class StatsProcessor {
 
                 @Override
                 public void run() {
-                    CoffeeStats leastPopularCoffee = CoffeService.Instance.getLeastPopularCoffee();
-                    List<User> usersByMostOrderedCoffee = UserService.Instance.getUsersByMostOrderedCoffee(leastPopularCoffee.getCoffee());
-                    System.out.println("Users who ordered least popular coffee: " + usersByMostOrderedCoffee);
+                    List<User> usersByMostOrderedCoffee = UserService.Instance
+                            .getAllUsers();
+                    usersByMostOrderedCoffee.forEach(user -> System.out.println(user.getName()));
                 }
             },
             6, new StatCalculator() {
@@ -110,23 +112,23 @@ public class StatsProcessor {
                 @Override
                 public void run() {
                     CoffeeStats leastPopularCoffee = CoffeService.Instance.getLeastPopularCoffee();
-                    System.out.println("User : " + UserService.Instance.getUserWhoOrderedMost(leastPopularCoffee.getCoffee()));
+                    System.out.println(
+                            "User : " + UserService.Instance.getUserWhoOrderedMost(leastPopularCoffee.getCoffee()));
                 }
             });
 
-
-public void printStatsMenu() {
-    System.out.println("Stats Menu:");
-    stats.forEach((k, v) -> System.out.println(k + ". " + v.getName()));
-}
-
-public void showStats(int statId) {
-    StatCalculator statCalculator = stats.get(statId);
-    if (statCalculator != null) {
-        statCalculator.run();
-    } else {
-        System.out.println("Invalid choice");
+    public void printStatsMenu() {
+        System.out.println("Stats Menu:");
+        stats.forEach((k, v) -> System.out.println(k + ". " + v.getName()));
     }
-}
+
+    public void showStats(int statId) {
+        StatCalculator statCalculator = stats.get(statId);
+        if (statCalculator != null) {
+            statCalculator.run();
+        } else {
+            System.out.println("Invalid choice");
+        }
+    }
 
 }

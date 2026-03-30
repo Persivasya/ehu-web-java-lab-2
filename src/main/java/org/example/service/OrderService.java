@@ -10,7 +10,7 @@ public class OrderService {
     public static final OrderService Instance = new OrderService();
     private final OrderRepository orderRepository = OrderRepository.Instance;
 
-    public List<OrderRepository> getAllOrders() {
+    public List<Order> getAllOrders() {
         return orderRepository.getAllOrders();
     }
 
@@ -30,10 +30,9 @@ public class OrderService {
         return orderRepository.getCount();
     }
 
-
     public Double getTotalRevenue() {
-        return null;
+        return getAllOrders().stream()
+                .mapToDouble(Order::getTotalPrice)
+                .sum();
     }
-
-
 }

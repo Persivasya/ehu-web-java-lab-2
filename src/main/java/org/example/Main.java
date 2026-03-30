@@ -9,16 +9,17 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println("Hello at Java Caffe!");
-        System.out.println("Available commands:");
-        System.out.println("To see the menu write: menu");
-        System.out.println("To do order write: order followed by space and coffee ids separated by space. For example: order 1 2 3 and Your Name");
-        System.out.println("To see stats list write: stats list");
-        System.out.println("To see stats by id write: stats followed by space and stat id. For example: stats 1");
-        System.out.println("To exit write: exit");
-
 
         boolean isRunning = true;
         while (isRunning) {
+            System.out.println();
+            System.out.println("Available commands:");
+            System.out.println("  menu               - Show the coffee menu");
+            System.out.println("  order <ids> <name> - Place an order (e.g. order 1 2 3 Viktor)");
+            System.out.println("  stats list         - Show all stats");
+            System.out.println("  stats <id>         - Show stats by id (e.g. stats 1)");
+            System.out.println("  exit               - Exit the application");
+            System.out.println();
 
             String command = System.console().readLine().trim();
 
